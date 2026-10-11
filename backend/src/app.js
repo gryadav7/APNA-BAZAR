@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
+import businessRoutes from "./routes/businessRoutes.js";
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
+
+
 app.get("/", (req, res) => {
     res.status(200).json({
         success: true,
@@ -24,6 +27,8 @@ app.get("/", (req, res) => {
     });
 });
 
+
 app.use("/api/auth",authRoutes);
+app.use("/api/business", businessRoutes);
 
 export default app;
