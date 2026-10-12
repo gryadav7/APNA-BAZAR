@@ -3,6 +3,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import businessRoutes from "./routes/businessRoutes.js";
+import availabilityRoutes from "./routes/availabilityRoutes.js";
+
+
+
 
 const app = express();
 
@@ -30,5 +34,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth",authRoutes);
 app.use("/api/business", businessRoutes);
+// Register all business availability endpoints under this URL prefix
+app.use("/api/availability", availabilityRoutes);
 
 export default app;
