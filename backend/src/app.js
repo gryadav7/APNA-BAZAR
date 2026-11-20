@@ -5,7 +5,7 @@ import authRoutes from "./routes/authRoutes.js";
 import businessRoutes from "./routes/businessRoutes.js";
 import availabilityRoutes from "./routes/availabilityRoutes.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
-
+import customerRoutes from "./routes/customerRoutes.js";
 
 
 const app = express();
@@ -38,5 +38,6 @@ app.use("/api/business", businessRoutes);
 app.use("/api/availability", availabilityRoutes);
 // Register appointment API routes.
 app.use("/api/appointments", appointmentRoutes);
+app.use("/api/customers", customerRoutes);
 
 export default app;
