@@ -91,6 +91,13 @@ const login = async (req, res) => {
       });
     }
 
+    if (user.status === "BLOCKED") {
+      return res.status(403).json({
+        success: false,
+        message: "Your account has been suspended or blocked by platform administration. Please contact support.",
+      });
+    }
+
     const token = jwt.sign(
       {
         userId: user._id,
@@ -110,15 +117,16 @@ const login = async (req, res) => {
     });
 
     return res.status(200).json({
-    success: true,
-    message: "Login successful",
-    user: {
+      success: true,
+      message: "Login successful",
+      user: {
         id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role
-    }
-});
+        role: user.role,
+        status: user.status || "ACTIVE"
+      }
+    });
 
   } catch (error) {
     console.error("Login error:", error);
@@ -170,6 +178,18 @@ const getMe = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "User not found",
+      });
+    }
+
+    if (user.status === "BLOCKED") {
+      res.clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+      });
+      return res.status(403).json({
+        success: false,
+        message: "Your account has been suspended or blocked by platform administration.",
       });
     }
 

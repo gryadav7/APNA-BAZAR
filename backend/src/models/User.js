@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema(
             type: String,
             enum: ["CUSTOMER", "BUSINESS_OWNER", "ADMIN"],
             default: "CUSTOMER"
+        },
+        status: {
+            type: String,
+            enum: ["ACTIVE", "BLOCKED"],
+            default: "ACTIVE"
         }
     },
     {

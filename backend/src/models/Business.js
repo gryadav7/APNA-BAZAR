@@ -55,6 +55,15 @@ const businessSchema = new mongoose.Schema(
             type: String,
             enum: ["ACTIVE", "SUSPENDED", "BLOCKED"],
             default: "ACTIVE"
+        },
+        subscriptionTier: {
+            type: String,
+            enum: ["FREE", "PRO", "PREMIUM"],
+            default: "FREE"
+        },
+        subscriptionExpiresAt: {
+            type: Date,
+            default: null
         }
     },
     { timestamps: true }
